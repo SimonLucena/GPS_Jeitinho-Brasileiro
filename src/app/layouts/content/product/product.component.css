@@ -1,0 +1,74 @@
+.product-container {
+    display: flex;
+    align-items: flex-start;
+    margin: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.product-image {
+    max-width: 400px;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.product-info {
+    margin-left: 20px;
+    flex: 1;
+}
+
+.product-name {
+    font-size: 24px;
+    margin-top: 0;
+}
+
+.product-price {
+    font-size: 20px;
+    color: #e74c3c; /* Cor vermelha para o preço */
+    margin-top: 10px;
+}
+
+.product-description {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #333;
+    line-height: 1.5;
+}
+
+.quantity-container,
+.cep-container,
+.buy-button-container {
+    margin-top: 20px;
+}
+
+.quantity-input,
+.cep-input,
+.buy-button {
+    padding: 10px;
+    font-size: 16px;
+}
+
+.quantity-input {
+    width: 80px;
+    text-align: center;
+}
+
+.cep-input {
+    width: 200px;
+    text-align: center;
+}
+
+.buy-button {
+    background-color: #28a745; /* Cor verde para o botão */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.buy-button:hover {
+    background-color: #218838; /* Cor verde escuro no hover */
+}

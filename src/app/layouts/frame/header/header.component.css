@@ -71,12 +71,13 @@
     border-top: 1px solid white; /* Linha branca separando o header do subheader */
   }
   
-  .subheader button {
+  .subheader a {
     margin: 0 15px; /* Espaçamento entre os botões */
     color: white;
     font-weight: bold;
+    text-decoration: none;
   }
   
-  .subheader button:hover {
+  .subheader a:hover {
     background-color: #6a4ec3; /* Cor de fundo ao passar o mouse */
   }

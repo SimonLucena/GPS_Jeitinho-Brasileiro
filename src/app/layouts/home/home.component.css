@@ -1,0 +1,253 @@
+/* Resetando margens e paddings globais */
+* {
+    margin: -10;
+    padding: -10;
+    box-sizing: border-box;
+  }
+  
+  /* Garantindo que o html e body ocupem a altura total */
+  html, body {
+    height: 100%;
+    width: 100%;
+  }
+  
+  /* Configurando o layout principal do body como flexbox */
+  body {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Header fixo no topo */
+  app-header {
+    flex-shrink: 0;
+    background-color: #4e3d96; /* Cor de fundo do header */
+    color: white;
+    width: 100%;
+    margin: 0;
+  }
+  
+  /* Footer fixo no rodapé */
+  app-footer {
+    flex-shrink: 0;
+    background-color: #4e3d96; /* Cor de fundo do footer */
+    color: white;
+    width: 100%;
+    margin: 0;
+  }
+  .wrapper {
+    flex-grow: 1;
+    padding: 0;  /* Remove o padding lateral e superior/inferior */
+    background-color: #f8f9fa; /* Cor de fundo do conteúdo */
+    width: 100%;
+    margin: 0;
+
+    flex-grow: 1;
+    box-sizing: border-box;
+    
+  }
+/* Subheader styles */
+.subheader {
+  background-color: #4e3d96;
+  padding: 10px;
+  border-top: 1px solid white;
+  text-align: center;
+}
+
+.subheader button {
+  margin: 0 15px;
+  color: white;
+  font-weight: bold;
+}
+
+.subheader button:hover {
+  background-color: #6a4ec3;
+}
+
+/* Banner styles */
+.banner {
+  width: 100%;
+  height: 300px; /* Altura fixa para o banner */
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* A imagem cobre toda a área mantendo a proporção */
+}
+
+.info-section {
+  display: flex;
+  justify-content: space-around; /* Distribui os itens de forma uniforme */
+  align-items: center; /* Alinha verticalmente os itens no centro */
+  background-color: #e0e0e0; /* Cor de fundo cinza */
+  padding: 20px 0; /* Espaçamento acima e abaixo */
+}
+
+.info-item {
+  text-align: center; /* Centraliza o texto */
+  max-width: 250px; /* Largura máxima dos itens */
+  flex: 1;
+}
+
+.icon-container {
+  width: 80px; /* Largura dos ícones */
+  height: 80px; /* Altura dos ícones */
+  margin: 0 auto 10px; /* Centraliza os ícones e adiciona espaçamento abaixo */
+  border-radius: 50%; /* Faz os ícones circulares */
+  border: 2px solid #000; /* Borda preta ao redor dos ícones */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-container img {
+  width: 50%; /* Ajuste o tamanho da imagem dentro do círculo */
+  height: auto;
+}
+
+.info-text h4 {
+  margin-bottom: 5px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #000;
+}
+
+.info-text p {
+  margin: 0;
+  font-size: 1rem;
+  color: #555;
+}
+.plans-container {
+  text-align: center; /* Centraliza o título e os cartões */
+  padding: 40px 0; /* Espaçamento superior e inferior */
+}
+
+.plans-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px; /* Espaçamento entre o título e os cartões */
+  color: #4e3d96; /* Cor roxa para combinar com o tema */
+}
+
+.plan-section {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.plan-card {
+  text-align: center;
+  max-width: 300px;
+  flex: 1;
+  margin: 0 20px;
+}
+
+.plan-image {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.plan-title {
+  margin-top: 15px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #000;
+}
+/* Seção de Destaques */
+.highlight-section {
+  text-align: center;
+  padding: 40px 0;
+  background-color: #fff;
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.highlight-carousel {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.carousel-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 20px;
+}
+
+.carousel-item {
+  min-width: 200px;
+  max-width: 250px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.carousel-item img {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-item h3 {
+  margin: 15px 0 5px;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.price {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #4e3d96;
+}
+
+.installments {
+  color: #666;
+}
+
+.installments span {
+  color: #4e3d96;
+  font-weight: bold;
+}
+
+/* Controles de Navegação */
+.carousel-control {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  transition: background-color 0.3s;
+}
+
+.carousel-control:hover {
+  background-color: #f0f0f0;
+}
+
+.prev {
+  left: -60px;
+}
+
+.next {
+  right: -60px;
+}

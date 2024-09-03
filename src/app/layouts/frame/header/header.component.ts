@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ComponentesAngularModule } from '../../componentes-angular/componentes-angular/componentes-angular.module'
+import { ComponentesAngularModule } from '../../../componentes-angular/componentes-angular/componentes-angular.module'
 
 @Component({
   selector: 'app-header',
@@ -10,8 +10,9 @@ import { ComponentesAngularModule } from '../../componentes-angular/componentes-
   template: `
     <div class="header">
       <div class="logo">
+        <a href="">
           <img src="/assets/logo.png" alt="Logo" />
-
+        </a>
       </div>
       <div class="search-bar">
         <input type="text" placeholder="O que você está buscando?" />
@@ -20,7 +21,7 @@ import { ComponentesAngularModule } from '../../componentes-angular/componentes-
         </button>
       </div>
       <div class="account-cart">
-        <a href="#" class="account">
+        <a href="/login" class="account">
           <mat-icon>account_circle</mat-icon> <!-- Ícone de conta -->
           <span>Minha conta</span>
         </a>
@@ -33,9 +34,9 @@ import { ComponentesAngularModule } from '../../componentes-angular/componentes-
     </div>
 
     <div class="subheader">
-      <button mat-button>Início</button>
-      <button mat-button>Produtos</button>
-      <button mat-button>Contato</button>
+      <a mat-button href="">Início</a>
+      <a mat-button href="/produtos">Produtos</a>
+      <a mat-button>Contato</a>
     </div>
   `,
   styleUrls: ['./header.component.css']

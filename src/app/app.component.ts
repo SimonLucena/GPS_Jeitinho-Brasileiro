@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ImagemReceitaComponent } from './imagem-receita/imagem-receita.component';
-import { HeaderComponent } from './layouts/header/header.component';
+import { ImagemReceitaComponent } from './layouts/content/imagem-receita/imagem-receita.component';
+import { HeaderComponent } from './layouts/frame/header/header.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './layouts/start/login/login.component';

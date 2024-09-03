@@ -1,0 +1,17 @@
+<app-header></app-header>
+
+<div class="product-list">
+    <div *ngFor="let product of data" class="product-card">
+      <img class="product-image" src="http://25.67.183.246:3011{{product.imagemUrl}}" alt="{{ product.nome }}" height="3rem">
+      <div class="product-info">
+        <h2 class="product-name">{{ product.nome }}</h2>
+        <p class="product-price">{{ product.preco | currency:'BRL' }}</p>
+      </div>
+      <div class="product-buttons">
+        <button class="btn-details">Detalhes</button>
+        <button class="btn-buy">Comprar</button>
+      </div>
+    </div>
+</div>
+
+<app-footer></app-footer>
