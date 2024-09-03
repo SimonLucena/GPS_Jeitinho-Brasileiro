@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { apiUrl } from 'src/app/componentes-angular/api-url';
 
 @Component({
   selector: 'app-login',
@@ -14,11 +15,12 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['login.component.css']
 })
 export class LoginComponent {
+  apiUrl = apiUrl;
   email:string = '';
   password:string = '';
   error:boolean = false;
 
-  url:string = "http://25.67.183.246:3011/user/login";
+  url:string = `${apiUrl}/user/login`;
 
   constructor(public http: HttpClient, public router: Router) { }
   
@@ -43,6 +45,10 @@ export class LoginComponent {
     console.log(user)
     return this.http.post<any>(this.url, user);
   };
+
+  cancelar(){
+    this.router.navigate(['/home']); // Navigate
+  }
 }
 interface User {
   email: string;

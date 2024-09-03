@@ -4,6 +4,7 @@ import { ComponentesAngularModule } from '../../../componentes-angular/component
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from '../../frame/header/header.component';
 import { FooterComponent } from '../../frame/footer/footer.component';
+import { apiUrl } from '../../../componentes-angular/api-url';
 
 @Component({
   selector: 'app-products',
@@ -13,6 +14,7 @@ import { FooterComponent } from '../../frame/footer/footer.component';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent {
+  apiUrl = apiUrl;
   httpClient = inject(HttpClient);
   data:any[] = [];
 
@@ -30,7 +32,7 @@ export class ProductsComponent {
   */
   fetchData(){
     this.httpClient
-      .get('http://25.67.183.246:3011/produtos/')
+      .get(`${apiUrl}/produtos/`)
       .subscribe((data: any) => {
         console.log(data.nome);
         this.data = data;

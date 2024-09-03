@@ -24,7 +24,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatDialogModule,
     MatMenuModule,
     MatOptionModule,
-    MatIconModule
+    MatIconModule,
   ],
   exports: [
     CommonModule,
@@ -39,7 +39,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatOptionModule,
     MatSelectModule,
     MatIconModule,
-    MatError
+    MatError,
   ]
 })
 export class ComponentesAngularModule { }

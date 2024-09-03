@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { apiUrl } from 'src/app/componentes-angular/api-url';
 
 @Component({
   selector: 'app-registro',
@@ -23,7 +24,7 @@ export class RegistroComponent {
   vazio:boolean = false;
   senhasDiferentes:boolean = false;
 
-  url:string = 'http://25.67.183.246:3011/user/register';
+  url:string = `${apiUrl}/user/register`;
 
   constructor(public http: HttpClient, public router: Router) { }
 
