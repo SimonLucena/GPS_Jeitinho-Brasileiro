@@ -14,7 +14,7 @@
 
 .logo img {
   height: 60px;
-  margin-right: 10px; /* Espaço entre a logo e o texto */
+  margin-right: 10px; 
 }
 
 .branding {
@@ -74,7 +74,6 @@
   margin-left: 5px;
 }
 
-/* Estilo para o subheader */
 .subheader {
   display: flex;
   justify-content: center;
@@ -84,12 +83,12 @@
 }
   
   .subheader a {
-    margin: 0 15px; /* Espaçamento entre os botões */
+    margin: 0 15px; 
     color: white;
     font-weight: bold;
     text-decoration: none;
   }
   
   .subheader a:hover {
-    background-color: #6a4ec3; /* Cor de fundo ao passar o mouse */
+    background-color: #6a4ec3;
   }

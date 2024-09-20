@@ -1,0 +1,29 @@
+<app-header></app-header>
+
+<div class="button-back-container">
+  <button class="btn-back" (click)="voltarParaProdutos()">Voltar</button>
+</div>
+
+<div class="product-details-container" *ngIf="product; else loading">
+  <div class="product-image-container">
+    <img class="product-image" [src]="product.imagemUrl" alt="{{ product.nome }}">
+  </div>
+
+  <div class="product-info-container">
+    <h2 class="product-name">{{ product.nome }}</h2>
+    <p class="product-price">Preço: R$ {{ product.preco | number:'1.2-2' }}</p>
+    <p class="product-description">Descrição: {{ product.descricao }}</p>
+    <p class="product-category">Categoria: {{ product.categoria_id }}</p>
+    <p class="product-stock">Estoque disponível: {{ product.estoque }}</p>
+
+    <button class="btn-buy">Comprar Agora</button>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div class="loading-container">
+    <p>Carregando detalhes do produto...</p>
+  </div>
+</ng-template>
+
+<app-footer></app-footer>
