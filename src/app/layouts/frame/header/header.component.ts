@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ComponentesAngularModule } from '../../../componentes-angular/componentes-angular/componentes-angular.module'
 
 @Component({
@@ -10,7 +10,18 @@ import { ComponentesAngularModule } from '../../../componentes-angular/component
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
+  storedResponse = localStorage.getItem('userData');
+  public userName: string = '';
+
+  ngOnInit(): void {
+    if(this.storedResponse){
+      const userData = JSON.parse(this.storedResponse);
+      this.userName = userData.user.nome;
+      // console.log('User ID:', userData.user.nome);
+    }
+  }
+
   @Output() cartOpened = new EventEmitter<void>();
   openCart() {
     this.cartOpened.emit();
