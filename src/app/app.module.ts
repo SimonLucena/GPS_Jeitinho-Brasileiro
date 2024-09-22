@@ -4,8 +4,7 @@ import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [ 
-  ],
+  declarations: [],
   imports: [
     BrowserModule, // Importar apenas aqui
     RouterModule.forRoot([]),

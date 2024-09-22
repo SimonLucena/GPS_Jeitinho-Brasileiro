@@ -1,32 +1,62 @@
 <div class="header">
-    <div class="logo">
-      <a href="/">
-        <img src="assets/logo.png" alt="" />
-      </a>
-      <span class="branding">JEITINHO BRASILEIRO</span> 
-    </div>
-    <div class="search-bar">
-      <input type="text" placeholder="O que você está buscando?" />
-      <button>
-        <mat-icon>search</mat-icon>
-      </button>
-    </div>
-    <div class="account-cart">
-      <a href="/login" class="account">
-        <mat-icon>account_circle</mat-icon>
-        <span>Minha conta</span>
-      </a>
-      <!-- <a href="#" class="cart" (click)="openCart()">
-        <mat-icon>shopping_cart</mat-icon>
-        <span>Meu carrinho</span>
-        <span class="cart-count">0</span>
-      </a> -->
-    </div>
-</div>
+  <div class="logo">
+    <a href="/">
+      <img src="assets/logo.png" alt="" />
+    </a>
+    <span class="branding">JEITINHO BRASILEIRO</span>
+  </div>
   
+  <div class="search-bar">
+    <input type="text" placeholder="O que você está buscando?" />
+    <button>
+      <mat-icon>search</mat-icon>
+    </button>
+  </div>
+  
+  <div class="account-cart">
+    <a href="/login" class="account">
+      <mat-icon>account_circle</mat-icon>
+      <span>Minha conta</span>
+    </a>
+    
+    <a href="#" class="cart" (click)="openCart()">
+      <mat-icon>shopping_cart</mat-icon>
+      <span>Meu carrinho</span>
+      <span class="cart-count">{{ carrinho.length }}</span>
+    </a>
+  </div>
+</div>
 
 <div class="subheader">
-    <a mat-button href="">Início</a>
-    <a mat-button href="/produtos">Produtos</a>
-    <!-- <a mat-button>Contato</a> -->
+  <a mat-button href="">Início</a>
+  <a mat-button href="/produtos">Produtos</a>
+</div>
+
+<!-- Modal do Carrinho -->
+<div class="cart-modal" *ngIf="cartVisible">
+  <div class="cart-header">
+    <h3>Meu Carrinho</h3>
+    <button (click)="closeCart()">X</button>
+  </div>
+  
+  <div class="cart-items" *ngIf="carrinho.length > 0; else emptyCart">
+    <div class="cart-item" *ngFor="let item of carrinho; let i = index">
+      <span>{{ item.nome }}</span>
+      <span>R$ {{ item.preco.toFixed(2) }}</span>
+      <div class="quantity">
+        <button (click)="decreaseQuantity(i)">-</button>
+        <span>{{ item.quantidade }}</span>
+        <button (click)="increaseQuantity(i)">+</button>
+      </div>
+      <button (click)="removeItem(i)">Excluir</button>
+    </div>
+    <div class="cart-total">
+      <h4>Total: R$ {{ getTotalPrice().toFixed(2) }}</h4>
+    </div>
+    <button class="checkout-btn" (click)="checkout()">Prosseguir para Compra</button>
+  </div>
+
+  <ng-template #emptyCart>
+    <p>Seu carrinho está vazio.</p>
+  </ng-template>
 </div>

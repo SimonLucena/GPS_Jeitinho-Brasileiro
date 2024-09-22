@@ -18,6 +18,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class HomeComponent {
   userId: string = '';
+  userName: string|null = localStorage.getItem('userData.user.nome');
 
   constructor(private route: ActivatedRoute) {}
 
@@ -25,6 +26,7 @@ export class HomeComponent {
     // Access the `id` from the route parameters
     this.userId = this.route.snapshot.paramMap.get('id') || '';
     console.log('User ID:', this.userId);
+    console.log('User Name:', this.userName);
   }
 
   @ViewChild('drawer') drawer!: MatSidenav;
