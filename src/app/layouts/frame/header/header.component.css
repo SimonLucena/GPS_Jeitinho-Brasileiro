@@ -155,3 +155,6 @@
   background-color: #6a4ec3;
 }
 
+.cart:hover {
+  cursor: pointer;
+}

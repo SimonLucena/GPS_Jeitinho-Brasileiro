@@ -12,8 +12,37 @@ import { Observable } from 'rxjs';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
+
 export class HeaderComponent {
-  @Output() cartOpened = new EventEmitter<void>();
+  cartVisible = false;
+
+  url:string = `${apiUrl}/carrinho/`;
+
+  carrinho: Item[];
+
+  constructor(public http: HttpClient, public router: Router) {
+    this.carrinho = new Array<Item>();
+    this.getCart().subscribe(
+      (response) => {
+        response.itens.map((item:any) => {
+          let quantidade = item.quantidade;
+          let produto = item.produto;
+          let produtoFinal: Item = {
+            id: produto.id,
+            nome: produto.nome,
+            preco: produto.preco,
+            quantidade: quantidade,
+          }
+          this.carrinho.push(produtoFinal);
+
+        });
+      },
+      (error) => {
+        console.error('Erro ao obter o carrinho:', error);
+      }
+    );
+  }
+
   openCart() {
     this.cartVisible = true;
     this.carrinho.map((item) => {console.log(item)});
