@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ComponentesAngularModule } from '../../../componentes-angular/componentes-angular/componentes-angular.module';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Router } from '@angular/router'; // Importar Router
 import { HeaderComponent } from '../../frame/header/header.component';
 import { FooterComponent } from '../../frame/footer/footer.component';
 import { apiUrl } from '../../../componentes-angular/api-url';
@@ -16,26 +17,22 @@ import { apiUrl } from '../../../componentes-angular/api-url';
 export class ProductsComponent {
   apiUrl = apiUrl;
   httpClient = inject(HttpClient);
-  data:any[] = [];
+  router = inject(Router); 
+  data: any[] = [];
 
   ngOnInit(): void {
     this.fetchData();
   }
-  /*
-    categoria_id
-    descricao
-    estoque
-    id
-    imagemUrl
-    nome
-    preco 
-  */
+
   fetchData(){
     this.httpClient
       .get(`${apiUrl}/produtos/`)
       .subscribe((data: any) => {
-        console.log(data.nome);
         this.data = data;
       });
+  }
+
+  detalharProduto(produtoId: number): void {
+    this.router.navigate(['/product-details', produtoId]);
   }
 }

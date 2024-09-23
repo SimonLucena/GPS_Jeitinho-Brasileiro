@@ -1,30 +1,27 @@
 <div class="header">
-  <div class="logo">
-    <a href="/">
-      <img src="assets/logo.png" alt="" />
-    </a>
-    <span class="branding">JEITINHO BRASILEIRO</span>
-  </div>
-  
-  <div class="search-bar">
-    <input type="text" placeholder="O que você está buscando?" />
-    <button>
-      <mat-icon>search</mat-icon>
-    </button>
-  </div>
-  
-  <div class="account-cart">
-    <a href="/login" class="account">
-      <mat-icon>account_circle</mat-icon>
-      <span>Minha conta</span>
-    </a>
-    
-    <a href="#" class="cart" (click)="openCart()">
-      <mat-icon>shopping_cart</mat-icon>
-      <span>Meu carrinho</span>
-      <span class="cart-count">{{ carrinho.length }}</span>
-    </a>
-  </div>
+    <div class="logo">
+      <a href="/">
+        <img src="assets/logo.png" alt="" />
+      </a>
+      <span class="branding">JEITINHO BRASILEIRO</span> 
+    </div>
+    <div class="search-bar">
+      <input type="text" placeholder="O que você está buscando?" />
+      <button>
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
+    <div class="account-cart">
+      <a href="/login" class="account">
+        <mat-icon>account_circle</mat-icon>
+        <span>Minha conta</span>
+      </a>
+      <!-- <a href="#" class="cart" (click)="openCart()">
+        <mat-icon>shopping_cart</mat-icon>
+        <span>Meu carrinho</span>
+        <span class="cart-count">0</span>
+      </a> -->
+    </div>
 </div>
 
 <div class="subheader">

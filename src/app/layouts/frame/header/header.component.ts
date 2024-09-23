@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ComponentesAngularModule } from '../../../componentes-angular/componentes-angular/componentes-angular.module'
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -13,35 +13,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-  cartVisible = false;
-
-  url:string = `${apiUrl}/carrinho/`;
-
-  carrinho: Item[];
-
-  constructor(public http: HttpClient, public router: Router) {
-    this.carrinho = new Array<Item>();
-    this.getCart().subscribe(
-      (response) => {
-        response.itens.map((item:any) => {
-          let quantidade = item.quantidade;
-          let produto = item.produto;
-          let produtoFinal: Item = {
-            id: produto.id,
-            nome: produto.nome,
-            preco: produto.preco,
-            quantidade: quantidade,
-          }
-          this.carrinho.push(produtoFinal);
-
-        });
-      },
-      (error) => {
-        console.error('Erro ao obter o carrinho:', error);
-      }
-    );
-  }
-
+  @Output() cartOpened = new EventEmitter<void>();
   openCart() {
     this.cartVisible = true;
     this.carrinho.map((item) => {console.log(item)});

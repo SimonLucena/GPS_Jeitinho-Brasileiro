@@ -27,7 +27,7 @@ export class LoginComponent {
   login_() {
     this.login().subscribe({
       next: (response) => {
-        localStorage.setItem('userData', response); // Assuming your API response includes a token
+        localStorage.setItem('token', response.token); // Assuming your API response includes a token
         this.router.navigate(['/home']); // Navigate to 'home' on successful login  -- , response.id
       },
       error: (err) => {
