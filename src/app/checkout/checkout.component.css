@@ -1,0 +1,19 @@
+.checkout-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .full-width {
+    width: 100%;
+  }
+  
+  .half-width {
+    width: 48%;
+    margin-right: 4%;
+  }
+  
+  mat-checkbox {
+    margin-top: 20px;
+  }
+  

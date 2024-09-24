@@ -4,7 +4,7 @@ import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http'
 import { Router } from '@angular/router';
 import { apiUrl } from 'src/app/componentes-angular/api-url';
 import { Observable } from 'rxjs';
-
+import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
 
   carrinho: Item[];
 
-  constructor(public http: HttpClient, public router: Router) {
+  constructor(public http: HttpClient, public router: Router, public dialog: MatDialog ) {
     this.carrinho = new Array<Item>();
     this.getCart().subscribe(
       (response) => {
@@ -54,10 +54,17 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+
+
   @Output() cartOpened = new EventEmitter<void>();
   openCart() {
     this.cartVisible = true;
     this.carrinho.map((item) => {console.log(item)});
+  }
+ 
+
+  logout(){
+    window.location.href = '/login';
   }
 
   // @Output() productAdded = new EventEmitter<void>();
@@ -117,6 +124,8 @@ export class HeaderComponent implements OnInit {
   checkout() {
     alert('Redirecionando para a página de checkout');
   }
+
+  
 }
 interface Item {
   id: number;

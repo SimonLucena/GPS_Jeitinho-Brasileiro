@@ -19,6 +19,7 @@ import { apiUrl } from 'src/app/componentes-angular/api-url';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+  
   userId: string = '';
   userName: string|null = localStorage.getItem('userData.user.nome');
   // userData = localStorage.getItem('userData');
