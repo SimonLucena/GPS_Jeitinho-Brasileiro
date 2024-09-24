@@ -25,7 +25,7 @@
       <a class="cart" (click)="openCart()">
         <mat-icon>shopping_cart</mat-icon>
         <span>Meu carrinho</span>
-        <span class="cart-count">{{carrinho.length}}</span>
+        <span class="cart-count">{{cartService.carrinho.length}}</span>
       </a>
     </div>
 </div>
@@ -42,8 +42,8 @@
     <button (click)="closeCart()" mat-button><mat-icon>close</mat-icon></button>
   </div>
   
-  <div class="cart-items" *ngIf="carrinho.length > 0; else emptyCart">
-    <div class="cart-item" *ngFor="let item of carrinho; let i = index">
+  <div class="cart-items" *ngIf="cartService.carrinho.length > 0; else emptyCart">
+    <div class="cart-item" *ngFor="let item of cartService.carrinho; let i = index">
       <span>{{ item.nome }}</span>
       <span>R$ {{ item.preco.toFixed(2) }}</span>
       <div class="quantity">

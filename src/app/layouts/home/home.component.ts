@@ -1,4 +1,4 @@
-import { Component, inject, Input, ViewChild } from '@angular/core';
+import { Component, inject, Input, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ComponentesAngularModule } from '../../componentes-angular/componentes-angular/componentes-angular.module';
 import { HeaderComponent } from '../frame/header/header.component';
@@ -6,37 +6,46 @@ import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { FooterComponent } from '../frame/footer/footer.component';
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { apiUrl } from 'src/app/componentes-angular/api-url';
+import { CartService } from 'src/app/services/cart.service';
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, ComponentesAngularModule, HeaderComponent, FooterComponent, RouterOutlet, MatIconModule],
+  imports: [CommonModule, ComponentesAngularModule, HeaderComponent, FooterComponent, RouterOutlet, MatIconModule, HttpClientModule],
+  providers: [CartService],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
-  
+export class HomeComponent implements OnInit {  
   userId: string = '';
   userName: string|null = localStorage.getItem('userData.user.nome');
-  // userData = localStorage.getItem('userData');
   storedResponse = localStorage.getItem('userData');
+  cartItems: Item[] = [];
   url:string = `${apiUrl}/produtos/`;
 
-  constructor(public http: HttpClient, private route: ActivatedRoute) {}
+  constructor(
+    public http: HttpClient,
+    private route: ActivatedRoute,
+    private cartService: CartService
+  ) {}
 
   ngOnInit(): void {
-    this.registrar()
-    // Access the `id` from the route parameters
+    this.registrar();
     this.userId = this.route.snapshot.paramMap.get('id') || '';
-    if(this.storedResponse){
+
+    if (this.storedResponse) {
       const userData = JSON.parse(this.storedResponse);
-      // console.log('User ID:', userData.user.nome);
+      // Process userData if needed
     }
+
+    // Fetch the cart items when the component initializes
+    this.loadCart();
   }
+
 
   @ViewChild('drawer') drawer!: MatSidenav;
 
@@ -51,26 +60,17 @@ export class HomeComponent {
     }
   }
 
-  /*
-  "id": 6,
-  "nome": "Laptop ABC",
-  "descricao": "Laptop para profissionais",
-  "preco": 4999.99,
-  "categoria_id": 1,
-  "estoque": 30,
-  "createdAt": "2024-09-19T22:48:38.663Z",
-  "updatedAt": "2024-09-19T22:48:38.663Z",
-  "imagemUrl": "/public/images/produtos/default.jpg"
-  */
-  id:number = 0;
-  nome:String = '';
-  descricao:String = '';
-  preco:number = 0;
-  categoria_id:number = 1;
-  estoque:number = 99;
-  createdAt = "2024-09-19T22:48:38.663Z";
-  updatedAt = "2024-09-19T22:48:38.663Z";
-  imagemUrl:String = '';
+  loadCart(): void {
+    this.cartService.getCart().subscribe(
+      (response) => {
+        this.cartService.initializeCart(response); // Assuming initializeCart updates the service's cart
+        this.cartItems = this.cartService.carrinho; // Update local cart items
+      },
+      (error) => {
+        console.error('Erro ao obter o carrinho:', error);
+      }
+    );
+  }
 
   criarProdutos(produto: Produto):Observable<any> {
     return this.http.post<any>(this.url, produto);
@@ -115,8 +115,12 @@ export class HomeComponent {
         id: 7
       },
     ];
+    
     produtos.forEach((product) => {
-      this.criarProdutos(product).subscribe(qualquer => localStorage.setItem('token', qualquer.token));
+      this.criarProdutos(product).subscribe(
+        (response) => localStorage.setItem('token', response.token),
+        (error) => console.error('Erro ao criar produtos:', error)
+      );
     });
   };
 
@@ -131,4 +135,10 @@ interface Produto {
   createdAt:String;
   updatedAt:String;
   imagemUrl:String;
+}
+interface Item {
+  id: number;
+  nome: string;
+  preco: number;
+  quantidade: number;
 }

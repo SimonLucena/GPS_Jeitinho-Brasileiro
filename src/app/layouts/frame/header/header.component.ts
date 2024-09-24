@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { apiUrl } from 'src/app/componentes-angular/api-url';
 import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-header',
@@ -13,124 +14,190 @@ import { MatDialog } from '@angular/material/dialog';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-
 export class HeaderComponent implements OnInit {
   cartVisible = false;
+  userName: string = '';
+  public cartService: CartService;
 
-  url:string = `${apiUrl}/carrinho/`;
+  constructor(cartService: CartService, private router: Router) {
+    this.cartService = cartService;
+  }
 
-  carrinho: Item[];
 
-  constructor(public http: HttpClient, public router: Router, public dialog: MatDialog ) {
-    this.carrinho = new Array<Item>();
-    this.getCart().subscribe(
+  ngOnInit(): void {
+    this.loadUserData();
+    this.loadCart();
+  }
+
+  loadUserData(): void {
+    const storedResponse = localStorage.getItem('userData');
+    if (storedResponse) {
+      const userData = JSON.parse(storedResponse);
+      this.userName = userData.user.nome;
+    }
+  }
+
+  loadCart(): void {
+    this.cartService.getCart().subscribe(
       (response) => {
-        response.itens.map((item:any) => {
-          let quantidade = item.quantidade;
-          let produto = item.produto;
-          let produtoFinal: Item = {
-            id: produto.id,
-            nome: produto.nome,
-            preco: produto.preco,
-            quantidade: quantidade,
-          }
-          this.carrinho.push(produtoFinal);
-
-        });
+        this.cartService.initializeCart(response);
       },
       (error) => {
         console.error('Erro ao obter o carrinho:', error);
       }
     );
   }
-  
-  storedResponse = localStorage.getItem('userData');
-  public userName: string = '';
 
-  ngOnInit(): void {
-    if(this.storedResponse){
-      const userData = JSON.parse(this.storedResponse);
-      this.userName = userData.user.nome;
-      // console.log('User ID:', userData.user.nome);
-    }
-  }
-
-
-
-  @Output() cartOpened = new EventEmitter<void>();
-  openCart() {
+  openCart(): void {
     this.cartVisible = true;
-    this.carrinho.map((item) => {console.log(item)});
-  }
- 
-
-  logout(){
-    window.location.href = '/login';
   }
 
-  // @Output() productAdded = new EventEmitter<void>();
-  addProduto(index:number ):Observable<any> {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      throw new Error('No token found in localStorage');
-    }
-
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    // const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);
-    const body = {
-      produtoId: index,
-      quantidade: 1
-    };
-    return this.http.post<any>(`${this.url}adicionar`, body, {headers} )
-  }
-
-  removerProduto(index:number ):Observable<any> {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);
-    const body = {
-      produtoId: index,
-      quantidade: -1
-    };
-    return this.http.post<any>(`${this.url}adicionar`, body, {headers} )
-  }
-
-  getCart():Observable<any> {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);
-    return this.http.get<any[]>(this.url, { headers } )
-  }
-
-  closeCart() {
+  closeCart(): void {
     this.cartVisible = false;
   }
 
-  increaseQuantity(index: number) {
-    const produto = this.carrinho[index];
-    const id = produto.id;
-    this.addProduto(id).subscribe(() => this.carrinho[index].quantidade++)
-  }
-  
-  decreaseQuantity(index: number) {
-    const produto = this.carrinho[index];
-    const id = produto.id;
-    this.removerProduto(id).subscribe(() => this.carrinho[index].quantidade--)
+  logout(): void {
+    window.location.href = '/login';
   }
 
-  removeItem(index: number) {
-    this.carrinho.splice(index, 1);
+  increaseQuantity(index: number): void {
+    this.cartService.increaseQuantity(index);
+  }
+
+  decreaseQuantity(index: number): void {
+    this.cartService.decreaseQuantity(index);
+  }
+
+  removeItem(index: number): void {
+    this.cartService.removeItem(index);
   }
 
   getTotalPrice(): number {
-    return this.carrinho.reduce((total, item) => total + (item.preco * item.quantidade), 0);
+    return this.cartService.getTotalPrice();
   }
 
-  checkout() {
-    alert('Redirecionando para a página de checkout');
+  checkout(): void {
+    this.cartService.checkout();
   }
+}
+
+// export class HeaderComponent implements OnInit {
+//   cartVisible = false;
+
+//   url:string = `${apiUrl}/carrinho/`;
+
+//   carrinho: Item[];
+
+//   constructor(public http: HttpClient, public router: Router, public dialog: MatDialog ) {
+//     this.carrinho = new Array<Item>();
+//     this.getCart().subscribe(
+//       (response) => {
+//         response.itens.map((item:any) => {
+//           let quantidade = item.quantidade;
+//           let produto = item.produto;
+//           let produtoFinal: Item = {
+//             id: produto.id,
+//             nome: produto.nome,
+//             preco: produto.preco,
+//             quantidade: quantidade,
+//           }
+//           this.carrinho.push(produtoFinal);
+
+//         });
+//       },
+//       (error) => {
+//         console.error('Erro ao obter o carrinho:', error);
+//       }
+//     );
+//   }
+  
+//   storedResponse = localStorage.getItem('userData');
+//   public userName: string = '';
+
+//   ngOnInit(): void {
+//     if(this.storedResponse){
+//       const userData = JSON.parse(this.storedResponse);
+//       this.userName = userData.user.nome;
+//       // console.log('User ID:', userData.user.nome);
+//     }
+//   }
+
+
+
+//   @Output() cartOpened = new EventEmitter<void>();
+//   openCart() {
+//     this.cartVisible = true;
+//     this.carrinho.map((item) => {console.log(item)});
+//   }
+ 
+
+//   logout(){
+//     window.location.href = '/login';
+//   }
+
+//   // @Output() productAdded = new EventEmitter<void>();
+//   addProduto(index:number ):Observable<any> {
+//     const token = localStorage.getItem('token');
+//     if (!token) {
+//       throw new Error('No token found in localStorage');
+//     }
+
+//     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+//     // const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);
+//     const body = {
+//       produtoId: index,
+//       quantidade: 1
+//     };
+//     return this.http.post<any>(`${this.url}adicionar`, body, {headers} )
+//   }
+
+//   removerProduto(index:number ):Observable<any> {
+//     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);
+//     const body = {
+//       produtoId: index,
+//       quantidade: -1
+//     };
+//     return this.http.post<any>(`${this.url}adicionar`, body, {headers} )
+//   }
+
+//   getCart():Observable<any> {
+//     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);
+//     return this.http.get<any[]>(this.url, { headers } )
+//   }
+
+//   closeCart() {
+//     this.cartVisible = false;
+//   }
+
+//   increaseQuantity(index: number) {
+//     const produto = this.carrinho[index];
+//     const id = produto.id;
+//     this.addProduto(id).subscribe(() => this.carrinho[index].quantidade++)
+//   }
+  
+//   decreaseQuantity(index: number) {
+//     const produto = this.carrinho[index];
+//     const id = produto.id;
+//     this.removerProduto(id).subscribe(() => this.carrinho[index].quantidade--)
+//   }
+
+//   removeItem(index: number) {
+//     this.carrinho.splice(index, 1);
+//   }
+
+//   getTotalPrice(): number {
+//     return this.carrinho.reduce((total, item) => total + (item.preco * item.quantidade), 0);
+//   }
+
+//   checkout() {
+//     alert('Redirecionando para a página de checkout');
+//   }
 
   
-}
-interface Item {
-  id: number;
-  nome: string;
-  preco: number;
-  quantidade: number;
-}
+// }
+// interface Item {
+//   id: number;
+//   nome: string;
+//   preco: number;
+//   quantidade: number;
+// }
