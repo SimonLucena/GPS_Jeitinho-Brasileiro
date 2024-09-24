@@ -29,6 +29,7 @@ export class HomeComponent {
   constructor(public http: HttpClient, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
+    this.registrar()
     // Access the `id` from the route parameters
     this.userId = this.route.snapshot.paramMap.get('id') || '';
     if(this.storedResponse){
@@ -38,13 +39,6 @@ export class HomeComponent {
   }
 
   @ViewChild('drawer') drawer!: MatSidenav;
-
-  cartItems = [
-    { name: 'Acarajé', price: 50, image: 'assets/acaraje.jpg' },
-    { name: 'Pato no Tucupi', price: 60, image: 'assets/pato-no-tucupi.jpg' },
-    { name: 'Feijoada', price: 30, image: 'assets/feijoada.jpg' },
-    { name: 'Coxinha', price: 25, image: 'assets/coxinha.jpg' },
-  ];
 
   ngAfterViewInit() {
   }
@@ -85,40 +79,40 @@ export class HomeComponent {
   registrar() {
     const produtos: Produto[] = [
       {
-        nome: 'Acarajé', preco: 50, imagemUrl: 'assets/acaraje.jpg',
+        nome: 'Acarajé', preco: 50, imagemUrl: '/public/images/produtos/acaraje.jpg',
         descricao: '',
-        categoria_id: 0,
-        estoque: 0,
-        createdAt: '',
-        updatedAt: '',
-        id: 2
-      },
-      {
-        nome: 'Pato no Tucupi', preco: 60, imagemUrl: 'assets/pato-no-tucupi.jpg',
-        descricao: '',
-        categoria_id: 0,
-        estoque: 0,
+        categoria_id: 3,
+        estoque: 99,
         createdAt: '',
         updatedAt: '',
         id: 3
       },
       {
-        nome: 'Feijoada', preco: 30, imagemUrl: 'assets/feijoada.jpg',
+        nome: 'Pato no Tucupi', preco: 60, imagemUrl: '/public/images/produtos/pato_no_tucupi.jpg',
         descricao: '',
-        categoria_id: 0,
-        estoque: 0,
+        categoria_id: 3,
+        estoque: 99,
         createdAt: '',
         updatedAt: '',
         id: 4
       },
       {
-        nome: 'Coxinha', preco: 25, imagemUrl: 'assets/coxinha.jpg',
+        nome: 'Feijoada', preco: 30, imagemUrl: '/public/images/produtos/feijoada.jpg',
         descricao: '',
-        categoria_id: 0,
-        estoque: 0,
+        categoria_id: 3,
+        estoque: 99,
         createdAt: '',
         updatedAt: '',
         id: 5
+      },
+      {
+        nome: 'Coxinha', preco: 25, imagemUrl: '/public/images/produtos/coxinha.jpg',
+        descricao: '',
+        categoria_id: 3,
+        estoque: 99,
+        createdAt: '',
+        updatedAt: '',
+        id: 7
       },
     ];
     produtos.forEach((product) => {

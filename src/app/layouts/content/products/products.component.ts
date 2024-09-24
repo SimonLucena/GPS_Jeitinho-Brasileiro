@@ -7,11 +7,12 @@ import { HeaderComponent } from '../../frame/header/header.component';
 import { FooterComponent } from '../../frame/footer/footer.component';
 import { apiUrl } from '../../../componentes-angular/api-url';
 import { Observable } from 'rxjs';
+import { ImagemReceitaComponent } from '../imagem-receita/imagem-receita.component';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [CommonModule, ComponentesAngularModule, HeaderComponent, FooterComponent, HttpClientModule],
+  imports: [CommonModule, ComponentesAngularModule, HeaderComponent, FooterComponent, HttpClientModule, ImagemReceitaComponent],
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
@@ -48,6 +49,16 @@ export class ProductsComponent {
         console.error('Erro ao obter o carrinho:', error);
       }
     );
+  }
+
+  private removeAccents(value: string): string {
+    return value.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  }
+
+  // Function to format the product name to a proper file name
+  fixProductName(productName: string): string {
+    const noAccents = this.removeAccents(productName);
+    return noAccents.toLowerCase().replace(/\s+/g, '_');
   }
 
   fetchData(){
