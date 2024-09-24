@@ -82,6 +82,7 @@ export class CartService {
 
   checkout(): void {
     alert('Redirecionando para a página de checkout');
+    window.location.href = '/checkout';
   }
 }
 
