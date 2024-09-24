@@ -47,7 +47,7 @@
       <span>{{ item.nome }}</span>
       <span>R$ {{ item.preco.toFixed(2) }}</span>
       <div class="quantity">
-        <button (click)="decreaseQuantity(i)">-</button>
+        <button (click)="decreaseQuantity(i)" [disabled]="item.quantidade <= 0">-</button>
         <span>{{ item.quantidade }}</span>
         <button (click)="increaseQuantity(i)">+</button>
       </div>
