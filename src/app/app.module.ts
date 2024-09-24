@@ -7,8 +7,6 @@ import { ProdDetailsComponent } from './prod-details/prod-details.component';
 
 @NgModule({
   declarations: [ 
-  
-    
   ],
   imports: [
     RouterModule.forRoot([]),
