@@ -66,7 +66,7 @@ export class HeaderComponent implements OnInit {
       produtoId: index,
       quantidade: 1
     };
-    return this.http.post<any>('http://25.67.183.246:3011/carrinho/adicionar', body, {headers} )
+    return this.http.post<any>(`${this.url}adicionar`, body, {headers} )
   }
 
   removerProduto(index:number ):Observable<any> {
@@ -75,7 +75,7 @@ export class HeaderComponent implements OnInit {
       produtoId: index,
       quantidade: -1
     };
-    return this.http.post<any>('http://25.67.183.246:3011/carrinho/adicionar', body, {headers} )
+    return this.http.post<any>(`${this.url}adicionar`, body, {headers} )
   }
 
   getCart():Observable<any> {
