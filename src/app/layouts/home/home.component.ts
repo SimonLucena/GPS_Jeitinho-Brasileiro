@@ -17,16 +17,22 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  userId: string = '';
-  userName: string|null = localStorage.getItem('userData.user.nome');
+//   userId: string = '';
+//   userName: string|null = localStorage.getItem('userData.user.nome');
+// =======
+//   // userData = localStorage.getItem('userData');
+//   storedResponse = localStorage.getItem('userData');
 
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     // Access the `id` from the route parameters
     this.userId = this.route.snapshot.paramMap.get('id') || '';
-    console.log('User ID:', this.userId);
-    console.log('User Name:', this.userName);
+=======
+    if(this.storedResponse){
+      const userData = JSON.parse(this.storedResponse);
+      // console.log('User ID:', userData.user.nome);
+    }
   }
 
   @ViewChild('drawer') drawer!: MatSidenav;

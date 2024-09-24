@@ -6,6 +6,8 @@ import { ProdDetailsComponent } from './prod-details/prod-details.component';
 
 @NgModule({
   declarations: [ 
+  
+    
   ],
   imports: [
     BrowserModule, // Importar apenas aqui

@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./header.component.css']
 })
 
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   cartVisible = false;
 
   url:string = `${apiUrl}/carrinho/`;
@@ -42,7 +42,19 @@ export class HeaderComponent {
       }
     );
   }
+  
+  storedResponse = localStorage.getItem('userData');
+  public userName: string = '';
 
+  ngOnInit(): void {
+    if(this.storedResponse){
+      const userData = JSON.parse(this.storedResponse);
+      this.userName = userData.user.nome;
+      // console.log('User ID:', userData.user.nome);
+    }
+  }
+
+  @Output() cartOpened = new EventEmitter<void>();
   openCart() {
     this.cartVisible = true;
     this.carrinho.map((item) => {console.log(item)});
