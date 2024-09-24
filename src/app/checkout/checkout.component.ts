@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AppModule } from '../app.module';
+import { Router } from '@angular/router';
+import { ComponentesAngularModule } from '../componentes-angular/componentes-angular/componentes-angular.module'
 
 @Component({
   selector: 'app-checkout',
@@ -13,7 +15,7 @@ export class CheckoutComponent implements OnInit {
   paymentFormGroup!: FormGroup;
   reviewFormGroup!: FormGroup;
 
-  constructor(private _formBuilder: FormBuilder) {}
+  constructor(private _formBuilder: FormBuilder, private router: Router) {}
 
   ngOnInit(): void {
     // Inicialização dos formulários
@@ -31,6 +33,10 @@ export class CheckoutComponent implements OnInit {
     this.reviewFormGroup = this._formBuilder.group({
       acceptTerms: [false, Validators.requiredTrue]
     });
+  }
+
+  onHome(){
+    this.router.navigate(['home']);
   }
 
   // Lógica para checkout final

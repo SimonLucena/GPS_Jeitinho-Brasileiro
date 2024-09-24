@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideNgxMask, IConfig } from 'ngx-mask';  // Importar IConfig e provideNgxMask
+import { MatIconModule } from '@angular/material/icon';
 
 // Definir o maskConfig
 const maskConfig: Partial<IConfig> = {
@@ -27,7 +28,8 @@ const maskConfig: Partial<IConfig> = {
     MatStepperModule,
     MatFormFieldModule,
     ReactiveFormsModule,
-    MatInputModule
+    MatInputModule,
+    MatIconModule
   ],
   providers: [
     provideNgxMask(maskConfig)  // Fornecer ngx-mask com a configuração correta

@@ -1,6 +1,10 @@
 <div class="checkout-container">
+  <div class="button-group-start">
+    <button mat-fab class="back button" (click)="onHome()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
   <mat-horizontal-stepper [linear]="isLinear" #stepper>
-    
     <!-- Etapa 1: Informações do Cliente -->
     <mat-step [stepControl]="customerFormGroup">
       <form [formGroup]="customerFormGroup">
