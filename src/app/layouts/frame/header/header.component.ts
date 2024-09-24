@@ -4,7 +4,6 @@ import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http'
 import { Router } from '@angular/router';
 import { apiUrl } from 'src/app/componentes-angular/api-url';
 import { Observable } from 'rxjs';
-
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -14,6 +13,7 @@ import { Observable } from 'rxjs';
 })
 
 export class HeaderComponent implements OnInit {
+  accMenuVisible = false;
   cartVisible = false;
 
   url:string = `${apiUrl}/carrinho/`;
@@ -58,6 +58,10 @@ export class HeaderComponent implements OnInit {
   openCart() {
     this.cartVisible = true;
     this.carrinho.map((item) => {console.log(item)});
+  }
+
+  logout(){
+    window.location.href = '/login';
   }
 
   addProduto(index:number ):Observable<any> {

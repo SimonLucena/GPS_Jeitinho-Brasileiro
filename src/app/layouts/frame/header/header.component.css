@@ -158,4 +158,21 @@
 .cart:hover {
   cursor: pointer;
 }
-  }
+.account-cart {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: relative; /* Necessário se houver ajustes manuais no menu */
+}
+
+.account {
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+}
+
+.mat-icon {
+  margin-right: 8px;
+}
