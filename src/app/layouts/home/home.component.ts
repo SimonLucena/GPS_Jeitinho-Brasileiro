@@ -17,6 +17,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+  
   userId: string = '';
   userName: string|null = localStorage.getItem('userData.user.nome');
   // userData = localStorage.getItem('userData');
