@@ -33,7 +33,7 @@
 <div class="cart-modal" *ngIf="cartVisible">
   <div class="cart-header">
     <h3>Meu Carrinho</h3>
-    <button (click)="closeCart()">X</button>
+    <button (click)="closeCart()" mat-button><mat-icon>close</mat-icon></button>
   </div>
   
   <div class="cart-items" *ngIf="carrinho.length > 0; else emptyCart">

@@ -1,8 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { ProdDetailsComponent } from './prod-details/prod-details.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { apiUrl } from './componentes-angular/api-url';
 
 @NgModule({
   declarations: [ 
@@ -10,9 +13,9 @@ import { ProdDetailsComponent } from './prod-details/prod-details.component';
   imports: [
     BrowserModule, // Importar apenas aqui
     RouterModule.forRoot([]),
-    // outros módulos
+    HttpClientModule
   ],
   providers: [],
   bootstrap: []
 })
-export class AppModule { }
+export class AppModule {}

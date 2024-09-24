@@ -7,6 +7,8 @@ import { FooterComponent } from '../frame/footer/footer.component';
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { apiUrl } from 'src/app/componentes-angular/api-url';
 
 
 @Component({
@@ -21,8 +23,9 @@ export class HomeComponent {
   userName: string|null = localStorage.getItem('userData.user.nome');
   // userData = localStorage.getItem('userData');
   storedResponse = localStorage.getItem('userData');
+  url:string = `${apiUrl}/produtos/`;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(public http: HttpClient, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     // Access the `id` from the route parameters
@@ -53,19 +56,84 @@ export class HomeComponent {
     }
   }
 
-  // httpClient = inject(HttpClient);
-  // data:any[] = [];
+  /*
+  "id": 6,
+  "nome": "Laptop ABC",
+  "descricao": "Laptop para profissionais",
+  "preco": 4999.99,
+  "categoria_id": 1,
+  "estoque": 30,
+  "createdAt": "2024-09-19T22:48:38.663Z",
+  "updatedAt": "2024-09-19T22:48:38.663Z",
+  "imagemUrl": "/public/images/produtos/default.jpg"
+  */
+  id:number = 0;
+  nome:String = '';
+  descricao:String = '';
+  preco:number = 0;
+  categoria_id:number = 1;
+  estoque:number = 99;
+  createdAt = "2024-09-19T22:48:38.663Z";
+  updatedAt = "2024-09-19T22:48:38.663Z";
+  imagemUrl:String = '';
 
-  // ngOnInit(): void {
-  //   this.fetchData();
-  // }
+  criarProdutos(produto: Produto):Observable<any> {
+    return this.http.post<any>(this.url, produto);
+  };
 
-  // fetchData(){
-  //   this.httpClient
-  //     .get('http://25.67.183.246:3011/user/login')
-  //     .subscribe((data: any) => {
-  //       // console.log(data.nome);
-  //       this.data = data;
-  //     });
-  // }
+  registrar() {
+    const produtos: Produto[] = [
+      {
+        nome: 'Acarajé', preco: 50, imagemUrl: 'assets/acaraje.jpg',
+        descricao: '',
+        categoria_id: 0,
+        estoque: 0,
+        createdAt: '',
+        updatedAt: '',
+        id: 2
+      },
+      {
+        nome: 'Pato no Tucupi', preco: 60, imagemUrl: 'assets/pato-no-tucupi.jpg',
+        descricao: '',
+        categoria_id: 0,
+        estoque: 0,
+        createdAt: '',
+        updatedAt: '',
+        id: 3
+      },
+      {
+        nome: 'Feijoada', preco: 30, imagemUrl: 'assets/feijoada.jpg',
+        descricao: '',
+        categoria_id: 0,
+        estoque: 0,
+        createdAt: '',
+        updatedAt: '',
+        id: 4
+      },
+      {
+        nome: 'Coxinha', preco: 25, imagemUrl: 'assets/coxinha.jpg',
+        descricao: '',
+        categoria_id: 0,
+        estoque: 0,
+        createdAt: '',
+        updatedAt: '',
+        id: 5
+      },
+    ];
+    produtos.forEach((product) => {
+      this.criarProdutos(product).subscribe(qualquer => localStorage.setItem('token', qualquer.token));
+    });
+  };
+
+}
+interface Produto {
+  id:number;
+  nome:String;
+  descricao:String;
+  preco:number;
+  categoria_id:number;
+  estoque:number;
+  createdAt:String;
+  updatedAt:String;
+  imagemUrl:String;
 }

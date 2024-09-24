@@ -7,6 +7,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './layouts/start/login/login.component';
 import { RouterLink, RouterOutlet, RouterModule } from '@angular/router';
 import { RegistroComponent } from './layouts/start/registro/registro.component';
+import { apiUrl } from './componentes-angular/api-url';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +18,7 @@ import { RegistroComponent } from './layouts/start/registro/registro.component';
 })
 
 export class AppComponent implements OnInit {
+  apiUrl = apiUrl;
   httpClient = inject(HttpClient);
   data:any[] = [];
 
@@ -34,7 +36,7 @@ export class AppComponent implements OnInit {
   */
   fetchData(){
     this.httpClient
-      .get('http://25.67.183.246:3011/produtos/')
+      .get(`${apiUrl}/produtos/`)
       .subscribe((data: any) => {
         // console.log(data.nome);
         this.data = data;
