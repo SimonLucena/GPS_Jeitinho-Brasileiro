@@ -67,8 +67,15 @@ export class HeaderComponent implements OnInit {
     window.location.href = '/login';
   }
 
+  // @Output() productAdded = new EventEmitter<void>();
   addProduto(index:number ):Observable<any> {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);
+    const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('No token found in localStorage');
+    }
+
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    // const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);
     const body = {
       produtoId: index,
       quantidade: 1
