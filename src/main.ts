@@ -10,6 +10,7 @@ bootstrapApplication(AppComponent, {
     provideRouter(routeConfig),
     provideAnimations(),
     provideAnimations(),
+    provideAnimations(),
     provideAnimations()
 ]
 })

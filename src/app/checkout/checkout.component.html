@@ -1,52 +1,64 @@
 <div class="checkout-container">
-    <mat-horizontal-stepper [linear]="isLinear" #stepper>
-      <mat-step [stepControl]="customerFormGroup">
-        <form [formGroup]="customerFormGroup">
-          <ng-template matStepLabel>Informações do Cliente</ng-template>
-          
-          <mat-form-field appearance="fill" class="full-width">
-            <mat-label>Nome</mat-label>
-            <input matInput placeholder="Seu nome" formControlName="name" required>
-          </mat-form-field>
-          
-          <mat-form-field appearance="fill" class="full-width">
-            <mat-label>Endereço</mat-label>
-            <textarea matInput placeholder="Seu endereço" formControlName="address" required></textarea>
-          </mat-form-field>
-  
-          <div>
-            <button mat-button matStepperNext [disabled]="!customerFormGroup.valid">Próximo</button>
-          </div>
-        </form>
-      </mat-step>
-  
-      <!-- Etapa 2: Informações de Pagamento -->
-      <mat-step [stepControl]="paymentFormGroup">
-        <form [formGroup]="paymentFormGroup">
-          <ng-template matStepLabel>Informações de Pagamento</ng-template>
-          
-          <mat-form-field appearance="fill" class="full-width">
-            <mat-label>Número do Cartão</mat-label>
-            <input matInput type="text" placeholder="1234 5678 9012 3456" formControlName="cardNumber" required>
-          </mat-form-field>
-  
-          <mat-form-field appearance="fill" class="half-width">
-            <mat-label>Data de Expiração</mat-label>
-            <input matInput type="text" placeholder="MM/AA" formControlName="expiryDate" required>
-          </mat-form-field>
-  
-          <mat-form-field appearance="fill" class="half-width">
-            <mat-label>CVV</mat-label>
-            <input matInput type="text" placeholder="123" formControlName="cvv" required>
-          </mat-form-field>
-  
-          <div>
-            <button mat-button matStepperPrevious>Voltar</button>
-            <button mat-button matStepperNext [disabled]="!paymentFormGroup.valid">Próximo</button>
-          </div>
-        </form>
-      </mat-step>
-  
-    </mat-horizontal-stepper>
-  </div>
-  
+  <mat-horizontal-stepper [linear]="isLinear" #stepper>
+    
+    <!-- Etapa 1: Informações do Cliente -->
+    <mat-step [stepControl]="customerFormGroup">
+      <form [formGroup]="customerFormGroup">
+        <ng-template matStepLabel>Informações do Cliente</ng-template>
+
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Nome</mat-label>
+          <input matInput placeholder="Seu nome" formControlName="name" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Endereço</mat-label>
+          <textarea matInput placeholder="Seu endereço" formControlName="address" required></textarea>
+        </mat-form-field>
+
+        <!-- Botão "Próximo" centralizado e estilizado -->
+        <div class="button-group-center">
+          <button mat-raised-button class="back large-button" matStepperNext [disabled]="!customerFormGroup.valid">
+            Próximo
+          </button>
+        </div>
+      </form>
+    </mat-step>
+
+    <!-- Etapa 2: Informações de Pagamento -->
+    <mat-step [stepControl]="paymentFormGroup">
+      <form [formGroup]="paymentFormGroup">
+        <ng-template matStepLabel>Informações de Pagamento</ng-template>
+
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Número do Cartão</mat-label>
+          <!-- Máscara para 16 dígitos do cartão -->
+          <input matInput placeholder="1234 5678 9012 3456" formControlName="cardNumber" mask="0000 0000 0000 0000" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="half-width">
+          <mat-label>Data de Expiração</mat-label>
+          <!-- Máscara no formato MM/AA -->
+          <input matInput placeholder="MM/AA" formControlName="expiryDate" mask="00/00" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="half-width">
+          <mat-label>CVV</mat-label>
+          <!-- Máscara para 3 dígitos do CVV -->
+          <input matInput placeholder="123" formControlName="cvv" mask="000" required>
+        </mat-form-field>
+
+        <!-- Botões "Voltar" e "Finalizar Pedido" centralizados e estilizados -->
+        <div class="button-group-center">
+          <button mat-flat-button class="back large-button" matStepperPrevious>
+            Voltar
+          </button>
+          <button mat-raised-button class="back large-button" (click)="submitOrder()" [disabled]="!paymentFormGroup.valid">
+            Finalizar Pedido
+          </button>
+        </div>
+      </form>
+    </mat-step>
+
+  </mat-horizontal-stepper>
+</div>
