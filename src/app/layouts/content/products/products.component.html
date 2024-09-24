@@ -3,7 +3,7 @@
 <div class="product-list">
     <div *ngFor="let product of data" class="product-card">
       <!-- <img class="product-image" src="{{apiUrl}}/public/images/produtos/default.jpg" alt="{{ product.nome }}" height="3rem"> -->
-       <app-imagem-receita [post]="{ imagemUrl: '/public/images/produtos/' + fixProductName(product.nome) + '.jpg' }"></app-imagem-receita>
+       <app-imagem-receita [post]="{ imagemUrl: product.nome }"></app-imagem-receita>
       <div class="product-info">
         <h2 class="product-name">{{ product.nome }}</h2>
         <p class="product-price">{{ product.preco | currency:'BRL' }}</p>

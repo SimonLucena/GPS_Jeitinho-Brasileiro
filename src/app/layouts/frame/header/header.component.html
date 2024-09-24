@@ -12,11 +12,11 @@
       </button>
     </div>
     <div class="account-cart">
-      <a href="#" class="account" [matMenuTriggerFor]="accountMenu">
+      <a class="account" [matMenuTriggerFor]="accountMenu">
         <mat-icon>account_circle</mat-icon>
         <span>{{userName}}</span>
       </a>
-      <mat-menu #accountMenu="matMenu">
+      <mat-menu #accountMenu="matMenu" [ngStyle]="{ margin: '10px' }">
         <button mat-menu-item (click)="logout()">
           <mat-icon>{{ userName ? 'exit_to_app' : 'login_lo_app' }}</mat-icon>
           {{ userName ? 'Sair' : 'Entrar' }}
